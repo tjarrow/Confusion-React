@@ -6,7 +6,6 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
 class DishDetail extends Component {
     constructor(props) {
         super(props);
-        
     }
 
     render() {
