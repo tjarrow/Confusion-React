@@ -6,7 +6,6 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
 class DishDetail extends Component {
     constructor(props) {
         super(props);
-        
     }
 
     render() {
@@ -20,7 +19,7 @@ class DishDetail extends Component {
                         <div className="row mt-1 mb-1" >
                             --{comment.author}
                             <span className="ml-1 mr-1"> , </span>
-                            {comment.date}
+                            {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}
                         </div>
                     </div>
                </div>
