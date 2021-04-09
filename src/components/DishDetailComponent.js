@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardText, CardBody,
-    CardTitle, Breadcrumb, BreadcrumbItem, CardImgOverlay } from 'reactstrap';
+import { Card, CardImg, CardText, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import CommentForm from './CommentFormComponent'
 
 class DishDetail extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const RenderComments = ({commentItems}) => (
@@ -33,11 +29,11 @@ class DishDetail extends Component {
                 <Card>
                     <Link to={`/menu/${dish.id}`} >
                         <CardImg width="100%" src={dish.image} alt={dish.name} />
-                        <CardImgOverlay>
-                            <CardTitle>{dish.name}</CardTitle>
-                        </CardImgOverlay>
-                        <CardText>
-                            {dish.description}
+                        <CardText className="mt-4">
+                            <CardTitle className="p-3 text-bold">{dish.name}</CardTitle>
+                        </CardText>
+                        <CardText className="mb-4">
+                            <p className="p-3">{dish.description}</p>
                         </CardText>
                     </Link>
                 </Card>
@@ -46,25 +42,26 @@ class DishDetail extends Component {
 
         return (
             <div className="container">
-            <div className="row">
-                <Breadcrumb>
-
-                    <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                    <BreadcrumbItem active>{this.props.dish.name}</BreadcrumbItem>
-                </Breadcrumb>
-                <div className="col-12">
-                    <h3>{this.props.dish.name}</h3>
-                    <hr />
-                </div>                
-            </div>
-            <div className="row">
-                <div className="col-12 col-md-5 m-1">
-                    <RenderComments commentItems={this.props.comments} />
-                 </div>
-                 <div className="col-12 col-md-5 m-1">
-                    <RenderMenuItem dish={this.props.dish}/>
-                 </div>
-            </div>
+                <div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{this.props.dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>Menu</h3>
+                        <hr />
+                    </div>                
+                </div>
+                <div className="row">
+                    <div className="col-12 col-md-5 m-1">
+                        <RenderMenuItem dish={this.props.dish}/>
+                    </div>
+                    <div className="col-12 col-md-5 m-1">
+                        <h4 className="p-0">Comments</h4>
+                        <RenderComments commentItems={this.props.comments} />
+                        <CommentForm/>
+                    </div>
+                </div>
             </div>
         );
     }
