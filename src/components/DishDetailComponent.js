@@ -4,6 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input,
     Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Control } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
 class CommentForm extends Component {
 
@@ -127,9 +128,33 @@ class CommentForm extends Component {
 
 class DishDetail extends Component {
 
+    constructor(props) {
+        super(props);
+
+    }
+
     render() {
+
+        if (this.props.isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
+        else if (this.props.errMess) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <h4>{this.props.errMess}</h4>
+                    </div>
+                </div>
+            );
+        }
+
         function RenderComments ({commentItems, addComment, dishId}) {
-            console.log(commentItems);
             return (
                 <div className="col-12 col-md-5 m-1">
                     {commentItems.map((comment) => {
@@ -169,32 +194,33 @@ class DishDetail extends Component {
                 </Card>
             );
         }
-
-        return (
-            <div className="container">
-                <div className="row">
-                    <Breadcrumb>
-                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>{this.props.dish.name}</BreadcrumbItem>
-                    </Breadcrumb>
-                    <div className="col-12">
-                        <h3>Menu</h3>
-                        <hr />
-                    </div>                
-                </div>
-                <div className="row">
-                    <div className="col-12 col-md-5 m-1">
-                        <RenderMenuItem dish={this.props.dish}/>
+        if (this.props.dish != null) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Breadcrumb>
+                            <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                            <BreadcrumbItem active>{this.props.dish.name}</BreadcrumbItem>
+                        </Breadcrumb>
+                        <div className="col-12">
+                            <h3>Menu</h3>
+                            <hr />
+                        </div>                
                     </div>
-                    <div className="col-12 col-md-5 m-1">
-                        <h4 className="p-0">Comments</h4>
-                        <RenderComments commentItems={this.props.comments} 
-                            addComment={this.props.addComment}
-                            dishId={this.props.dish.id}/>
+                    <div className="row">
+                        <div className="col-12 col-md-5 m-1">
+                            <RenderMenuItem dish={this.props.dish}/>
+                        </div>
+                        <div className="col-12 col-md-5 m-1">
+                            <h4 className="p-0">Comments</h4>
+                            <RenderComments commentItems={this.props.comments} 
+                                addComment={this.props.addComment}
+                                dishId={this.props.dish.id}/>
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
 }
 
