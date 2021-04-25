@@ -5,6 +5,7 @@ import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input,
 import { Control } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 class CommentForm extends Component {
 
@@ -183,7 +184,7 @@ class DishDetail extends Component {
             return (
                 <Card>
                     <Link to={`/menu/${dish.id}`} >
-                        <CardImg width="100%" src={dish.image} alt={dish.name} />
+                        <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                         <CardText className="mt-4">
                             <CardTitle className="p-3 text-bold">{dish.name}</CardTitle>
                         </CardText>

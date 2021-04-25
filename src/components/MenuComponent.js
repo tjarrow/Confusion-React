@@ -5,6 +5,7 @@ import { Card, CardImg, CardImgOverlay,
 import DishDetail from './DishDetailComponent';
 import { Loading } from './LoadingComponent';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
 
     
 class Menu extends Component {
@@ -39,7 +40,7 @@ class Menu extends Component {
                 <div  className="col-12 col-md-5 m-1">
                     <Card key={dish.id}
                         onClick={() => this.onDishSelect(dish)}>
-                        <CardImg width="100%" src={dish.image} alt={dish.name} />
+                        <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
                         <CardImgOverlay>
                             <CardTitle><Link to={`/menu/${dish.id}`} >{dish.name}</Link></CardTitle>
                         </CardImgOverlay>
