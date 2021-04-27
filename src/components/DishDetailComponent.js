@@ -47,7 +47,9 @@ class CommentForm extends Component {
         values = this.state;
         console.log('Current state is: ', JSON.stringify(this.state));
         this.toggleModal();
-        this.props.addComment(this.props.dishId, values.rating, values.name, values.comment);
+        console.log(this.props.dishId);
+        console.log(values);
+        this.props.postComment(this.props.dishId, values.rating, values.name, values.comment);
     }
 
     handleBlur = (field) => (evt) => {
@@ -155,7 +157,7 @@ class DishDetail extends Component {
             );
         }
 
-        function RenderComments ({commentItems, addComment, dishId}) {
+        function RenderComments ({commentItems, postComment, dishId}) {
             return (
                 <div className="col-12 col-md-5 m-1">
                     {commentItems.map((comment) => {
@@ -174,11 +176,10 @@ class DishDetail extends Component {
                         </div>
                         )
                         })}
-                    <CommentForm dishId={dishId} addComment={addComment} />
+                    <CommentForm dishId={dishId} postComment={postComment} />
                 </div>
             ); 
         }   
-            
         
         function RenderMenuItem ({dish, onClick}) {
             return (
@@ -215,7 +216,7 @@ class DishDetail extends Component {
                         <div className="col-12 col-md-5 m-1">
                             <h4 className="p-0">Comments</h4>
                             <RenderComments commentItems={this.props.comments} 
-                                addComment={this.props.addComment}
+                                postComment={this.props.postComment}
                                 dishId={this.props.dish.id}/>
                         </div>
                     </div>
